@@ -1,2 +1,2 @@
-#ここにURL
-ここに時間 xx:xx:xx-xx:xx:xxの表記で書くこと　例  1:23:45-1:30:00 or 02:45-08:00
+https://youtu.be/rn6FplIZNc0          #ここにURL
+31:09-31:35                           #ここにどこからどこまでの時間かを指定する xx:xx:xx-xx:xx:xx の表記で書くこと
