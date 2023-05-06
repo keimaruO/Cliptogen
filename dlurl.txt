@@ -1,2 +1,2 @@
-https://youtu.be/rn6FplIZNc0
-31:09-31:35
+#ここにURL
+ここに時間 xx:xx:xx-xx:xx:xxの表記で書くこと　例  1:23:45-1:30:00 or 02:45-08:00
