@@ -4,6 +4,10 @@ from moviepy.video.io.VideoFileClip import VideoFileClip
 import textwrap
 from moviepy.editor import TextClip, CompositeVideoClip
 
+
+font_path = './fonts/NOTOSANSJP-EXTRABOLD.TTF'
+
+
 def add_subtitles_to_video(input_video_path, subtitles, output_video_path, font_path):
     video = VideoFileClip(input_video_path)
     fps = video.fps
@@ -50,7 +54,6 @@ def sentence_parse_and_line_parse(text, max_line_length=15, max_lines=4):
     if current_line:
         parsed_text_list.append(current_line.strip())
     return parsed_text_list[:max_lines]
-font_path = os.path.join(BASE_DIR, "input", "NOTOSANSJP-BLACK.TTF")
 
 def annotate(clip, txt, font_path, max_line_length=15, max_lines=4):
     video_width, video_height = clip.size
