@@ -1,6 +1,13 @@
 import textwrap
 import budoux
+def sentence_parse_and_line_parse(text, max_line_length=18, max_lines=4):
+    text = text.replace(" ", "")
+    parsed_text_list = budoux_parse_text(text, max_line_length)
 
+    if len(parsed_text_list) > max_lines:
+        parsed_text_list = parsed_text_list[:max_lines - 1] + [''.join(parsed_text_list[max_lines - 1:])]
+
+    return parsed_text_list
 def wrap_text(text, max_length=14, max_lines=2):
     wrapped_lines = textwrap.wrap(text, width=max_length)
     
