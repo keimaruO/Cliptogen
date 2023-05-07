@@ -11,7 +11,6 @@ def concatenate_videos(input_dir, output_dir, output_name):
     with open("concat.txt", "w", encoding="utf-8") as f:
         for file in file_list:
             f.write(f"file '{os.path.join(input_dir, file)}'\n")
-
     concat_command = f'ffmpeg -y -f concat -safe 0 -i concat.txt -c copy "{os.path.join(output_dir, output_name)}"'
     os.system(concat_command)
     os.remove("concat.txt")
@@ -20,7 +19,6 @@ def extract_and_concatenate_audio(input_dir, output_dir, output_name):
     file_list = [file for file in os.listdir(input_dir) if file.endswith('.mp4')]
     file_list = sorted(file_list, key=lambda x: int(re.search(r'\d+', x).group()))
     audio_files = []
-
     for file in file_list:
         audio_output = os.path.join(output_dir, "{}.wav".format(re.search(r'\d+', file).group()))
         audio_files.append(audio_output)
@@ -33,14 +31,12 @@ def extract_and_concatenate_audio(input_dir, output_dir, output_name):
 
     concat_audio_command = f'ffmpeg -y -f concat -safe 0 -i concat_audio.txt -c copy "{os.path.join(output_dir, output_name)}"'
     os.system(concat_audio_command)
-
     os.remove("concat_audio.txt")
     for audio_file in audio_files:
         os.remove(audio_file)
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
 subprocess.run(["python", os.path.join(BASE_DIR, "Auto_yt-dlp_DL.py")])
 
 
