@@ -51,7 +51,7 @@ def sentence_parse_and_line_parse(text, max_line_length=15, max_lines=4):
 
     return parsed_text_list[:max_lines]
 
-font_path = 'C:/USERS/KEI11/APPDATA/LOCAL/MICROSOFT/WINDOWS/FONTS/NOTOSANSJP-BLACK.TTF'
+font_path = os.path.join(BASE_DIR, "input", "NOTOSANSJP-BLACK.TTF")
 
 def annotate(clip, txt, font_path, max_line_length=15, max_lines=4):
     video_width, video_height = clip.size
