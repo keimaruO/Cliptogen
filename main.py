@@ -3,9 +3,12 @@ from subtitle_parser import parse_srt_file
 from video_annotator import add_subtitles_to_video
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+root_dir = os.path.dirname(os.path.abspath(__file__))
+
 input_video_path = os.path.join(BASE_DIR, "output", "concatenated_video.mp4")
 srt_file_path = os.path.join(BASE_DIR, "output", "temp_1.srt")
 output_video_path = os.path.join(BASE_DIR, "done", "done.mp4")
 subtitles = parse_srt_file(srt_file_path)
-font_path = os.path.join(BASE_DIR, "input", "NOTOSANSJP-BLACK.TTF")
+font_path = './fonts/NOTOSANSJP-EXTRABOLD.TTF'
 add_subtitles_to_video(input_video_path, subtitles, output_video_path, font_path)
+print("font_path:", font_path)
