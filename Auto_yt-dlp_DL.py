@@ -1,7 +1,7 @@
 import os
 import re
 
-options = '-f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]" -N 1 -S vcodec:h264'　#最高画質,最高音質
+options = '-f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]" -N 1 -S vcodec:h264' #最高画質,最高音質
 #options = '-f "bestvideo[height<=144][fps<=8][ext=mp4]+bestaudio[ext=m4a]/best[height<=144][fps<=8][ext=mp4]" -N 1 -S vcodec:h264'
 #options = '-f "bestvideo[height<=720][fps<=12][ext=mp4]+bestaudio[ext=m4a]/best[height<=720][fps<=12][ext=mp4]" -N 1 -S vcodec:h264'
 #options = '-f "bestvideo[height<=720][fps<=12][ext=mp4]+bestaudio[ext=m4a]/best[height<=720][fps<=30][ext=mp4]" -N 1 -S vcodec:h264' #720p,最高音質
