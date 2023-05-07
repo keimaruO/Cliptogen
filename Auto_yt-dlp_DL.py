@@ -1,7 +1,6 @@
 import os
 
-#options = '-f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]" -N 1 -S vcodec:h264'
-options = '-f "bestvideo[height<=720][fps<=12][ext=mp4]+bestaudio[ext=m4a]/best[height<=720][fps<=30][ext=mp4]" -N 1 -S vcodec:h264'
+options = '-f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]" -N 1 -S vcodec:h264'
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
