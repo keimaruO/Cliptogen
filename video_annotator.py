@@ -3,6 +3,7 @@ from moviepy.editor import concatenate_videoclips, TextClip, CompositeVideoClip
 from moviepy.video.io.VideoFileClip import VideoFileClip
 import textwrap
 from moviepy.editor import TextClip, CompositeVideoClip
+
 def add_subtitles_to_video(input_video_path, subtitles, output_video_path, font_path):
     video = VideoFileClip(input_video_path)
     fps = video.fps
@@ -22,6 +23,7 @@ def add_subtitles_to_video(input_video_path, subtitles, output_video_path, font_
     for clip in clips:
         clip.close()
     final_clip.close()
+    
 def wrap_text(text, max_length=16, max_lines=4):
     wrapped_lines = textwrap.wrap(text, width=max_length)
 
@@ -45,12 +47,9 @@ def sentence_parse_and_line_parse(text, max_line_length=15, max_lines=4):
                 current_line = wrapped_text
                 if len(parsed_text_list) == max_lines - 1:
                     break
-
     if current_line:
         parsed_text_list.append(current_line.strip())
-
     return parsed_text_list[:max_lines]
-
 font_path = os.path.join(BASE_DIR, "input", "NOTOSANSJP-BLACK.TTF")
 
 def annotate(clip, txt, font_path, max_line_length=15, max_lines=4):
