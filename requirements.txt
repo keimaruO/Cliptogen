@@ -1,4 +1,4 @@
-git+https://github.com/jordimas/whisper-ctranslate2.git@0.2.4
+git+https://github.com/jordimas/whisper-ctranslate2.git@0.1.1
 pysrt
 datetime
 moviepy
