@@ -1,4 +1,4 @@
-# Cliptogen
+# Cliptogen 未完成
 
 Cliptogenは[プロジェクトの説明]です。
 
