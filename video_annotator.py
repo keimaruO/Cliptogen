@@ -14,9 +14,15 @@ def add_subtitles_to_video(input_video_path, subtitles, output_video_path, font_
     fps = video.fps
     clips = []
 
-    for subtitle in subtitles:
+    video_duration = video.duration
+
+    for index, subtitle in enumerate(subtitles):
         start_time = datetime.timedelta(hours=subtitle['start'].hour, minutes=subtitle['start'].minute, seconds=subtitle['start'].second, microseconds=subtitle['start'].microsecond).total_seconds()
         end_time = datetime.timedelta(hours=subtitle['end'].hour, minutes=subtitle['end'].minute, seconds=subtitle['end'].second, microseconds=subtitle['end'].microsecond).total_seconds()
+        
+        if index == len(subtitles) - 1 and end_time > video_duration:
+            end_time = video_duration
+
         clip = video.subclip(start_time, end_time)
         annotated_clip = annotate(clip, subtitle['text'], font_path)
         clips.append(annotated_clip)
@@ -28,6 +34,7 @@ def add_subtitles_to_video(input_video_path, subtitles, output_video_path, font_
     for clip in clips:
         clip.close()
     final_clip.close()
+
     
 def wrap_text(text, max_length=16, max_lines=4):
     wrapped_lines = textwrap.wrap(text, width=max_length)
