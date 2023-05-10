@@ -1,0 +1,20 @@
+#yt-memo {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    padding: 10px;
+    border-top-right-radius: 8px;
+    border: 1px solid #ccc;
+    z-index: 9999;
+  }
+  
+  #yt-memo input {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+  
+  #yt-toggle {
+    width: 100%;
+  }
+  

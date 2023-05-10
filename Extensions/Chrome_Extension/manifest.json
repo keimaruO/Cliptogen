@@ -1,0 +1,17 @@
+{
+    "manifest_version": 3,
+    "name": "SPEED CLIPPER",
+    "version": "1.0",
+    "description": "開始時間と終了時間を最速でとるやーつ",
+    "permissions": ["activeTab", "scripting"],
+    "action": {
+      "default_icon": "icon.png"
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://www.youtube.com/watch*"],
+        "js": ["content.js"]
+      }
+    ]
+  }
+  
