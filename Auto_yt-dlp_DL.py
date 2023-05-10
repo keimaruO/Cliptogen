@@ -1,13 +1,14 @@
 import os
 import re
+import subprocess
 
 options = '-f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]" -N 1 -S vcodec:h264' #最高画質,最高音質
-#options = '-f "bestvideo[height<=144][fps<=8][ext=mp4]+bestaudio[ext=m4a]/best[height<=144][fps<=8][ext=mp4]" -N 1 -S vcodec:h264'
-#options = '-f "bestvideo[height<=720][fps<=12][ext=mp4]+bestaudio[ext=m4a]/best[height<=720][fps<=12][ext=mp4]" -N 1 -S vcodec:h264'
+
 #options = '-f "bestvideo[height<=720][fps<=12][ext=mp4]+bestaudio[ext=m4a]/best[height<=720][fps<=30][ext=mp4]" -N 1 -S vcodec:h264' #720p,最高音質
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+os.environ["PATH"] += os.pathsep + BASE_DIR
 output_dir = os.path.join(BASE_DIR, 'output', 'yt-dlp')
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
@@ -34,7 +35,7 @@ with open(os.path.join(BASE_DIR, 'dlurl.txt'), 'r') as f:
                 line = f'{start_time}-{end_time}'
             output_path = os.path.join(output_dir, f'{counter}%(title)s.%(ext)s')
             command = f'yt-dlp {options} -o "{output_path}" --download-sections *{line} {url}'
-            os.system(command)
+            subprocess.run(command, shell=True, cwd=BASE_DIR)
             counter += 1
             start_time = 0
         else:
