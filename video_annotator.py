@@ -1,12 +1,13 @@
+import os
 import datetime
 from moviepy.editor import concatenate_videoclips, TextClip, CompositeVideoClip
 from moviepy.video.io.VideoFileClip import VideoFileClip
 import textwrap
 from moviepy.editor import TextClip, CompositeVideoClip
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-font_path = './fonts/NOTOSANSJP-EXTRABOLD.TTF'
-
+font_path = "Cliptogen/fonts/NOTOSANSJP-EXTRABOLD.TTF"
 
 def add_subtitles_to_video(input_video_path, subtitles, output_video_path, font_path):
     video = VideoFileClip(input_video_path)
@@ -58,6 +59,7 @@ def sentence_parse_and_line_parse(text, max_line_length=15, max_lines=4):
 def annotate(clip, txt, font_path, max_line_length=15, max_lines=4):
     video_width, video_height = clip.size
     fontsize = int(video_height * 0.08)
+    textclip_size = (video_width, video_height)
 
     parsed_txt_list = sentence_parse_and_line_parse(txt, max_line_length, max_lines)
     parsed_txt = "\n".join(parsed_txt_list)
