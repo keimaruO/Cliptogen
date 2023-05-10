@@ -3,3 +3,4 @@ pysrt
 datetime
 moviepy
 budoux
+foliantcontrib.imagemagick
