@@ -1,0 +1,19 @@
+{
+    "txtclip_white": {
+        "font": "Cliptogen/fonts/NOTOSANSJP-EXTRABOLD.TTF",
+        "color": "white",
+        "stroke_color": "#000000"
+    },
+    "txtclip_black": {
+        "font": "Cliptogen/fonts/NOTOSANSJP-EXTRABOLD.TTF",
+        "color": "black",
+        "stroke_color": "#000000",
+        "stroke_width": 7
+    },
+    "txtclip_ffa3aa": {
+        "font": "Cliptogen/fonts/NOTOSANSJP-EXTRABOLD.TTF",
+        "color": "#FFA3AA",
+        "stroke_color": "#FFA3AA",
+        "stroke_width": 12
+    }
+}
