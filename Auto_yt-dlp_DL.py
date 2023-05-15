@@ -5,13 +5,14 @@ import subprocess
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # yt-dlpが存在するディレクトリのパスを設定
-yt_dlp_dir = os.path.join(script_dir, "F:\\TEEEEEEEEESSSSSSSSTTTTTTT\\NENE\\Cliptogen")
+yt_dlp_dir = "yt-dlp"
 
 # dlurl.txtファイルの絶対パスを指定
-DLURL_FILE = r"F:\TEEEEEEEEESSSSSSSSTTTTTTT\NENE\Cliptogen\dlurl.txt"
+DLURL_FILE = "dlurl.txt"
 
 def main():
     # dlurl.txtファイルを開く
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
     with open(DLURL_FILE, "r") as file:
         lines = file.readlines()
 
@@ -47,7 +48,7 @@ def main():
             ])
 
             print("Executing command:", cmd)
-            subprocess.run(cmd, shell=True, cwd=yt_dlp_dir)
+            subprocess.run(cmd, shell=True)
 
 
 if __name__ == "__main__":
