@@ -1,13 +1,14 @@
 import os
 import datetime
+import json
 from moviepy.editor import concatenate_videoclips, TextClip, CompositeVideoClip
 from moviepy.video.io.VideoFileClip import VideoFileClip
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-font_path = "Cliptogen/fonts/NOTOSANSJP-EXTRABOLD.TTF"
 
-def add_subtitles_to_video(input_video_path, subtitles, output_video_path, font_path):
+
+def add_subtitles_to_video(input_video_path, subtitles, output_video_path, settings):
     video = VideoFileClip(input_video_path)
     fps = video.fps
     clips = []
@@ -22,7 +23,7 @@ def add_subtitles_to_video(input_video_path, subtitles, output_video_path, font_
             end_time = video_duration
 
         clip = video.subclip(start_time, end_time)
-        annotated_clip = annotate(clip, subtitle['text'], font_path)
+        annotated_clip = annotate(clip, subtitle['text'], settings)
         clips.append(annotated_clip.set_audio(clip.audio))
 
     final_clip = concatenate_videoclips(clips)
@@ -68,7 +69,7 @@ def sentence_parse_and_line_parse(text, video_width, fontsize, max_lines=4, max_
 
 
 
-def annotate(clip, txt, font_path, max_lines=4):
+def annotate(clip, txt, settings, max_lines=4):
     video_width, video_height = clip.size
     fontsize = int(video_height * 0.088)
     parsed_txt_list, fontsize = sentence_parse_and_line_parse(txt, video_width, fontsize, max_lines=max_lines, max_chars=21)
@@ -76,22 +77,22 @@ def annotate(clip, txt, font_path, max_lines=4):
 
     txtclip_white = TextClip(parsed_txt,
         fontsize=fontsize,
-        font=font_path,
-        color='white'
+        font=settings['txtclip_white']['font'],
+        color=settings['txtclip_white']['color'],
     )
     txtclip_black = TextClip(parsed_txt,
         fontsize=fontsize,
-        font=font_path,
-        color='black',
-        stroke_color="#000000",
-        stroke_width=7
+        font=settings['txtclip_black']['font'],
+        color=settings['txtclip_black']['color'],
+        stroke_color=settings['txtclip_black']['stroke_color'],
+        stroke_width=settings['txtclip_black']['stroke_width']
     )
     txtclip_ffa3aa = TextClip(parsed_txt,
         fontsize=fontsize,
-        font=font_path,
-        color='#FFA3AA',
-        stroke_color="#FFA3AA",
-        stroke_width=12
+        font=settings['txtclip_ffa3aa']['font'],
+        color=settings['txtclip_ffa3aa']['color'],
+        stroke_color=settings['txtclip_ffa3aa']['stroke_color'],
+        stroke_width=settings['txtclip_ffa3aa']['stroke_width']
     )
     cvc = CompositeVideoClip([
         clip,
@@ -101,4 +102,3 @@ def annotate(clip, txt, font_path, max_lines=4):
     ], size=clip.size).set_duration(clip.duration)
 
     return cvc.set_duration(clip.duration)
-
