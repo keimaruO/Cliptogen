@@ -1,42 +1,54 @@
 import os
-import re
 import subprocess
 
-options = '-f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]" -N 1 -S vcodec:h264' #最高画質,最高音質
+# 現在のスクリプトのディレクトリを取得
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
-#options = '-f "bestvideo[height<=720][fps<=12][ext=mp4]+bestaudio[ext=m4a]/best[height<=720][fps<=30][ext=mp4]" -N 1 -S vcodec:h264' #720p,最高音質
+# yt-dlpが存在するディレクトリのパスを設定
+yt_dlp_dir = os.path.join(script_dir, "F:\\TEEEEEEEEESSSSSSSSTTTTTTT\\NENE\\Cliptogen")
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# dlurl.txtファイルの絶対パスを指定
+DLURL_FILE = r"F:\TEEEEEEEEESSSSSSSSTTTTTTT\NENE\Cliptogen\dlurl.txt"
 
-os.environ["PATH"] += os.pathsep + BASE_DIR
-output_dir = os.path.join(BASE_DIR, 'output', 'yt-dlp')
-if not os.path.exists(output_dir):
-    os.makedirs(output_dir)
-counter = 1
+def main():
+    # dlurl.txtファイルを開く
+    with open(DLURL_FILE, "r") as file:
+        lines = file.readlines()
 
-with open(os.path.join(BASE_DIR, 'dlurl.txt'), 'r') as f:
-    url = ''
-    for line in f:
+    current_url = ""
+    output_counter = 1
+
+    # 各行を処理する
+    for line in lines:
         line = line.strip()
-        if line.startswith('https://youtu.be/') or line.startswith('https://www.youtube.com/'):
-            video_id = re.search(r'(?<=\bv=)[^&]*|(?<=\b/)[^&/?]*', line).group(0)
-            if video_id != 'watch':
-                url = f'https://www.youtube.com/watch?v={video_id}'
-                timecode = re.search(r'(?<=\bt=)[0-9]+', line)
-                if timecode:
-                    start_time = int(timecode.group(0))
-                else:
-                    start_time = 0
-        elif re.match(r'\d+:\d+:\d+-\d+:\d+:\d+|\d+:\d+-\d+:\d+', line) and url != '':
-            if start_time != 0:
-                parts = line.split('-')
-                start_time += int(parts[0].split(':')[0]) * 60 + int(parts[0].split(':')[1])
-                end_time = start_time + int(parts[1].split(':')[0]) * 60 + int(parts[1].split(':')[1])
-                line = f'{start_time}-{end_time}'
-            output_path = os.path.join(output_dir, f'{counter}%(title)s.%(ext)s')
-            command = f'yt-dlp {options} -o "{output_path}" --download-sections *{line} {url}'
-            subprocess.run(command, shell=True, cwd=BASE_DIR)
-            counter += 1
-            start_time = 0
-        else:
+
+        # 空行をスキップ
+        if not line:
             continue
+
+        # URLの場合
+        if "http" in line:
+            current_url = line
+        # 時間範囲の場合
+        else:
+            start_time, end_time = line.split("-")
+            output_path = f'output/yt-dlp/{output_counter}%(title)s.%(ext)s'
+            output_counter += 1
+
+            # yt-dlpコマンドを実行
+            cmd = " ".join([
+                "yt-dlp",
+                "-f", "\"bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]\"",
+                "-N", "1",
+                "-S", "vcodec:h264",
+                "-o", output_path,
+                "--download-sections", f'*{start_time}-{end_time}',
+                current_url
+            ])
+
+            print("Executing command:", cmd)
+            subprocess.run(cmd, shell=True, cwd=yt_dlp_dir)
+
+
+if __name__ == "__main__":
+    main()
