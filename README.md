@@ -21,7 +21,7 @@ zlib https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html#install
 
 # インストール手順
 
-エクスプローラーを開き保存したい場所で上にあるファイルパスでcmdと入力してEnterキーを押すとコマンドプロンプトが起動します。
+エクスプローラーを開き保存したい場所で上にあるファイルパスでcmdと入力してEnterキーを押すとそのパスでコマンドプロンプトが起動します。
 
 そして以下のコマンドを実行して、環境構築を行います。
     
