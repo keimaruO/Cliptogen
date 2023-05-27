@@ -19,6 +19,7 @@ cuDNN https://developer.nvidia.com/rdp/cudnn-download
 
 zlib https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html#install-zlib-windows
 
+ImageMagick https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-10-Q16-HDRI-x64-dll.exe
 # インストール手順
 
 エクスプローラーを開き保存したい場所で上にあるファイルパスでcmdと入力してEnterキーを押すとそのパスでコマンドプロンプトが起動します。
